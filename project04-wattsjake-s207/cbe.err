@@ -1,0 +1,22 @@
+No errors on assembly of 'c:\users\jacob\documents\stm8\project04-wattsjake-s207\main.asm'
+No errors on assembly of 'c:\users\jacob\documents\stm8\project04-wattsjake-s207\main.asm'
+No errors on assembly of 'c:\users\jacob\documents\stm8\project04-wattsjake-s207\mapping.asm'
+No errors on assembly of 'c:\users\jacob\documents\stm8\project04-wattsjake-s207\mapping.asm'
+
+c:\users\jacob\documents\stm8\project04-wattsjake-s207\main.asm(49): as1 : Fatal 71: Cannot have code in segment prev containing DS.x! .. only for non-[void] segs! 'D->C'
+
+
+c:\users\jacob\documents\stm8\project04-wattsjake-s207\main.asm(49): as1 : Fatal 71: Cannot have code in segment prev containing DS.x! .. only for non-[void] segs! 'D->C'
+
+
+c:\users\jacob\documents\stm8\project04-wattsjake-s207\main.asm(49): as1 : Fatal 71: Cannot have code in segment prev containing DS.x! .. only for non-[void] segs! 'D->C'
+
+
+c:\users\jacob\documents\stm8\project04-wattsjake-s207\main.asm(49): as1 : Fatal 71: Cannot have code in segment prev containing DS.x! .. only for non-[void] segs! 'D->C'
+
+c:\users\jacob\documents\stm8\project04-wattsjake-s207\main.asm(51): as1 : Error 54: Can't match Addressing mode '    mov A, #$FF'
+1 error on assembly of 'c:\users\jacob\documents\stm8\project04-wattsjake-s207\main.asm'
+c:\users\jacob\documents\stm8\project04-wattsjake-s207\main.asm(51): as1 : Error 54: Can't match Addressing mode '    mov A, #$FF'
+1 error on assembly of 'c:\users\jacob\documents\stm8\project04-wattsjake-s207\main.asm'
+No errors on assembly of 'c:\users\jacob\documents\stm8\project04-wattsjake-s207\main.asm'
+No errors on assembly of 'c:\users\jacob\documents\stm8\project04-wattsjake-s207\main.asm'

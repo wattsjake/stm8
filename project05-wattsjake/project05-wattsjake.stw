@@ -4,9 +4,9 @@
 Keyword=ST7Workspace-V0.7
 
 [Project0]
-Filename=led-colors.stp
+Filename=src\interrupts.stp
 Dependencies=
 [Options]
-ActiveProject=led-colors
+ActiveProject=interrupts
 ActiveConfig=Debug
 AddSortedElements=1

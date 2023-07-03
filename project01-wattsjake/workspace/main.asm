@@ -19,6 +19,8 @@ stm8/
 
 	segment 'rom'
 ;------------------ PORT CONFIGURATION ------------------
+;may not need to define the port addresses still need to
+;research...
 PD_ODR EQU $00500F  ;Port D data output latch register
 PD_IDR EQU $005010  ;PD_IDR Port D input pin value register
 PD_DDR EQU $005011  ;PD_DDR Port D data direction register

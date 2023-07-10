@@ -5,6 +5,12 @@
 *.dep
 *.pdb
 *.stp
+*.cod
+*.grp
+*.lsr
+*.map
+*.sym
+*.err
 
 
 

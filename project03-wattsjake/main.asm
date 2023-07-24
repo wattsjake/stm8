@@ -22,7 +22,7 @@ button          ds.b
 button_state    ds.b
 
 	segment 'rom'
-main.l
+mains.l
 	; initialize SP
 	ldw X,#stack_end
 	ldw SP,X

@@ -6,7 +6,3 @@ Keyword=ST7Workspace-V0.7
 [Project0]
 Filename=stvisualtest.stp
 Dependencies=
-[Options]
-ActiveProject=stvisualtest
-ActiveConfig=Debug
-AddSortedElements=1

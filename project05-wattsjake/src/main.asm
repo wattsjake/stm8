@@ -8,6 +8,9 @@ stm8/
 ;Revision History
 ;Date[YYYYMMDD] Author          Description
 ;----           ------          -----------
+;20230623       Jacob W.        initial commit 
+;20230723       Jacob W.        issues with debugging
+;20230723       Jacob W.        code is working now
 ;********************************************************
 
 ;------------------------ TODO --------------------------
@@ -17,10 +20,16 @@ stm8/
     #include "stm8s103k.inc"
 
     segment 'rom'
+;------------------------ INIT --------------------------
+    mov TIM2_PSCR, #$03 ;prescaler = 8 PC 0x8080
+    mov TIM2_ARRH, #$00 ;high byte of 50,000
+    mov TIM2_ARRL, #$AF ;low byte of 50,000
+    mov TIM2_IER, #$01 ;enable interrupts
+    mov TIM2_CR1, #$01 ;enable the timer
 ;------------------------ MAIN --------------------------
 main:
     ld A,#$FF
-    call naive_delay
+    ;call naive_delay
     ld A,#$00
     jra main
 ;----------------------- DELAY --------------------------

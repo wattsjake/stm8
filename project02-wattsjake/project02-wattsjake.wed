@@ -44,7 +44,7 @@ ptn_Child33=Bar-32
 
 [WorkState_v1_2.DockState.Bar-0]
 BarID=59419
-Bars=20
+Bars=26
 Bar#0=0
 Bar#1=59647
 Bar#2=0
@@ -65,6 +65,12 @@ Bar#16=0
 Bar#17=32768
 Bar#18=0
 Bar#19=0
+Bar#20=0
+Bar#21=0
+Bar#22=0
+Bar#23=0
+Bar#24=0
+Bar#25=0
 Style=0
 ExStyle=0
 PrevFloating=False
@@ -123,18 +129,17 @@ ResourceID=0
 
 [WorkState_v1_2.DockState.Bar-2]
 BarID=59422
-Bars=11
+Bars=10
 Bar#0=0
-Bar#1=0
-Bar#2=0
-Bar#3=5707
-Bar#4=5706
-Bar#5=5710
-Bar#6=5704
-Bar#7=5721
+Bar#1=5707
+Bar#2=5706
+Bar#3=5710
+Bar#4=5704
+Bar#5=5721
+Bar#6=0
+Bar#7=32769
 Bar#8=0
-Bar#9=32769
-Bar#10=0
+Bar#9=0
 Style=0
 ExStyle=0
 PrevFloating=False
@@ -571,9 +576,9 @@ MRUWidth=23
 Docking=True
 MRUDockID=59419
 MRUDockLeftPos=730
-MRUDockTopPos=31
+MRUDockTopPos=28
 MRUDockRightPos=770
-MRUDockBottomPos=61
+MRUDockBottomPos=58
 MRUFloatStyle=8196
 MRUFloatXPos=0
 MRUFloatYPos=0
@@ -1245,7 +1250,7 @@ ptn_Child2=ChildFrames
 
 [WorkState_v1_2.Frames.MainFrame]
 WindowPlacement=MCAAAAAACAAAAAAADAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPHLAAAAAAEHAAAAAAEGEAAAAADBDAAAAA
-Title=ST Visual Develop - project02-wattsjake.stw
+Title=ST Visual Develop - project02-wattsjake.stw - [main.asm]
 
 [WorkState_v1_2.Frames.ChildFrames]
 ptn_Child1=Document-0
@@ -1257,6 +1262,6 @@ ptn_Child1=ViewFrame-0
 DocPathName=main.asm
 DocumentString=
 DocTemplateIndex=0
-WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPAAAAAAAAAAAAAAAALEFAAAAANJBAAAAA
+WindowPlacement=MCAAAAAACAAAAAAADAAAAAAAPPPPPPPPPPPPPPPPIPPPPPPPBOPPPPPPAAAAAAAAAAAAAAAALEFAAAAANJBAAAAA
 IsActiveChildFrame=True
 IsFrameVisible=True

@@ -34,7 +34,7 @@ PD_CR2 EQU $005013  ;PD_CR2 Port D control register 2
 main:
     bres PD_ODR, #0 ;sets PD0 to low
     call naive_delay
-    bset PD_ODR, #0 ;sets PD0 to high
+    bset PD_ODR, #1 ;sets PD0 to high
     call naive_delay
     jra main
 

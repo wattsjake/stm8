@@ -14,23 +14,24 @@ stm8/
 ;---------------------- INCLUDES ------------------------
 	#include "mapping.inc"
     #include "stm8s103k.inc"
-
+    
     segment byte at 000 'ram1'
 timer_count ds.b
 
     segment 'rom'
-init: 
-    ld A, #$00
-    ld timer_count, A
-
 main:
     
-    ld A, #$F0
-    mov TIM1_CR1, #$10
-
     
 
+    ld A, #$45
+    
+    mov TIM2_PSCR, #$03 ;prescaler = 8
+    mov TIM2_ARRH, #$00 ;high byte of 50,000
+    mov TIM2_ARRL, #$AF ;low byte of 50,000
+    mov TIM2_IER, #$01
+    mov TIM2_CR1, #$01
+    
 infinite_loop:
-	jra infinite_loop
-
-	end
+    jra infinite_loop
+ 
+    end

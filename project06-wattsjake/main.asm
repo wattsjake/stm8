@@ -2,7 +2,7 @@ stm8/
 
 	#include "mapping.inc"
     #include "stm8s103k.inc"
-
+    
 	segment 'rom'
 main.l
 	; initialize SP
@@ -48,7 +48,7 @@ initilize:
     sim ;disable interrupts
     mov TIM2_PSCR, #$03 ;prescaler = 8 PC 0x8080
     mov TIM2_ARRH, #$00 ;high byte of 50,000
-    mov TIM2_ARRL, #$AF ;low byte of 50,000
+    mov TIM2_ARRL, #$AA ;low byte of 50,000
     bset TIM2_IER, #0 ;enable update interrupt
     rim ;Enable interrupts
     bset TIM2_CR1, #0 ;enable the timer
@@ -61,11 +61,50 @@ loop:
     jra loop
 
 ; TIM2 update/overflow handler
-tim2_overflow:
+    interrupt tim2_overflow
+tim2_overflow.l
     mov TIM2_SR1, #$00 ;reset interupt
     mov $01, #$50
     iret
+    
+	interrupt NonHandledInterrupt
+NonHandledInterrupt.l
+	iret
+    
+	segment 'vectit'
+	dc.l {$82000000+main}									; reset
+	dc.l {$82000000+NonHandledInterrupt}	; trap
+	dc.l {$82000000+NonHandledInterrupt}	; irq0
+	dc.l {$82000000+NonHandledInterrupt}	; irq1
+	dc.l {$82000000+NonHandledInterrupt}	; irq2
+	dc.l {$82000000+NonHandledInterrupt}	; irq3
+	dc.l {$82000000+NonHandledInterrupt}	; irq4
+	dc.l {$82000000+NonHandledInterrupt}	; irq5
+	dc.l {$82000000+NonHandledInterrupt}	; irq6
+	dc.l {$82000000+NonHandledInterrupt}	; irq7
+	dc.l {$82000000+NonHandledInterrupt}	; irq8
+	dc.l {$82000000+NonHandledInterrupt}	; irq9
+	dc.l {$82000000+NonHandledInterrupt}	; irq10
+	dc.l {$82000000+NonHandledInterrupt}	; irq11
+	dc.l {$82000000+NonHandledInterrupt}	; irq12
+	dc.l {$82000000+tim2_overflow}	; irq13
+	dc.l {$82000000+NonHandledInterrupt}	; irq14
+	dc.l {$82000000+NonHandledInterrupt}	; irq15
+	dc.l {$82000000+NonHandledInterrupt}	; irq16
+	dc.l {$82000000+NonHandledInterrupt}	; irq17
+	dc.l {$82000000+NonHandledInterrupt}	; irq18
+	dc.l {$82000000+NonHandledInterrupt}	; irq19
+	dc.l {$82000000+NonHandledInterrupt}	; irq20
+	dc.l {$82000000+NonHandledInterrupt}	; irq21
+	dc.l {$82000000+NonHandledInterrupt}	; irq22
+	dc.l {$82000000+NonHandledInterrupt}	; irq23
+	dc.l {$82000000+NonHandledInterrupt}	; irq24
+	dc.l {$82000000+NonHandledInterrupt}	; irq25
+	dc.l {$82000000+NonHandledInterrupt}	; irq26
+	dc.l {$82000000+NonHandledInterrupt}	; irq27
+	dc.l {$82000000+NonHandledInterrupt}	; irq28
+	dc.l {$82000000+NonHandledInterrupt}	; irq29
 
 
-    end ;need to do an 'Enter' after end statement
+    end ;need to do an 'Enter' after 'end' statement
     

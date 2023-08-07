@@ -3,6 +3,9 @@ stm8/
 	#include "mapping.inc"
     #include "stm8s103k.inc"
     
+    segment byte at 100 'ram1'
+led_state  ds.b
+    
 	segment 'rom'
 main.l
 	; initialize SP
@@ -45,26 +48,33 @@ clear_stack.l
     
 ;------------------------ INIT --------------------------
 initilize:
+        
+    bset PD_DDR, #0 ;sets PD0 as output
+    
     sim ;disable interrupts
-    mov TIM2_PSCR, #$03 ;prescaler = 8 PC 0x8080
-    mov TIM2_ARRH, #$00 ;high byte of 50,000
-    mov TIM2_ARRL, #$AA ;low byte of 50,000
+    mov TIM2_PSCR, #$03 ;3 = prescaler = 8 PC 0x8080
+    mov TIM2_ARRH, #$c3 ;high byte of 50,000
+    mov TIM2_ARRL, #$50 ;low byte of 50,000
     bset TIM2_IER, #0 ;enable update interrupt
     rim ;Enable interrupts
     bset TIM2_CR1, #0 ;enable the timer
+    
+    bres PD_ODR, #0 ;sets PD0 to low led on
+    bset led_state, #0 ;set bit0 to 1
 ;------------------------ MAIN --------------------------
 loop:
-    ld A,#$FF
-    ;call naive_delay
-    ld A,#$00
-    mov $00, #$45
+    ld A, led_state
+    mov PD_ODR, led_state
+    
+    ;ld led_state, A
     jra loop
 
 ; TIM2 update/overflow handler
     interrupt tim2_overflow
 tim2_overflow.l
     mov TIM2_SR1, #$00 ;reset interupt
-    mov $01, #$50
+    xor A, #$FF
+    ld led_state, A
     iret
     
 	interrupt NonHandledInterrupt

@@ -1,5 +1,4 @@
 #ST Visual Studio
-
 /stm8s-spl
 */Debug
 *.dep
@@ -11,13 +10,11 @@
 *.map
 *.sym
 *.err
-
-
+*.spy
 
 #Silicon Labs IDE
 *.OBJ
 *.LST
-
 *.M51
 *.out
 *cyglink.txt

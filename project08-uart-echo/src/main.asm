@@ -10,10 +10,18 @@ stm8/
 ;----           ------          -----------
 ;20230826		Jacob W.        initial commit
 ;20230826	  	Jacob W.        figured out UART receive en
+;20230827       Jacob W.        working echo in asm
 ;***********************************************************
 
 ;------------------------ TODO -----------------------------
-;
+
+;------------------------ NOTES ----------------------------
+;red power, black ground, white RX into USB port, 
+;and green TX out of the USB port
+;crystal is 16MHz
+;baud rate is 9600
+;PD6 is UART1_RX - green
+;PD5 is UART1_TX - white
 ;---------------------- INCLUDES ---------------------------
 	#include "mapping.inc"
     #include "stm8s103k.inc"
@@ -77,6 +85,18 @@ uart_init:
 	mov UART1_CR1, #$00 ;8 data bits, 1 stop bit, no parity 
 	;refer to pg 366 of RM0016
 	bset UART1_CR2, #2 ;enable receiver
+
+echo:
+    
+    btjf UART1_SR, #5, echo ;wait for data to be received
+	bres UART1_CR2, #2 ;disable receiver
+	
+send:
+    bset UART1_CR2, #3 ;enable transmitter pg 329
+    ld A, UART1_DR ;load data from UART1_DR
+    ld UART1_DR, A
+    bset UART1_CR2, #2 ;enable receiver
+    jp echo
 
 ;------------------------ INIT -----------------------------
 initilize:

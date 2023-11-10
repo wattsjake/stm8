@@ -1,3 +1,6 @@
+#Other Files
+*.txt
+
 #ST Visual Studio
 /stm8s-spl
 */Debug

@@ -9,7 +9,7 @@ def parent_dir():
 
 def create_folder_name(idx, json_object):
     #create folder name in the format of course_number-lab-idx-last_name-first_name
-    foldername = json_object["course_number"] + json_object["suffix"] + idx + "-" + json_object["last_name"] + json_object["first_name"]
+    foldername = "project" + idx + "-" + json_object["project_name"]
     # print("foldername: " + foldername)
     return foldername
 
@@ -63,21 +63,16 @@ Options and arguments (and corresponding environment variables):\n\
 
     if (sys.argv[1] == "-E"):
         print("Editing .json file")
-        #ask for course number
-        course_number = input("Enter your course number: ")
         #ask user for next index number
         index_number = input("Enter your starting idx value: ")
-        #ask user for last name
-        last_name = input("Enter your last name: ")
-        #ask user for first name
-        first_name = input("Enter your first name: ")
+        #ask user project name
+        project_name = input("Enter your project name: ")
+
         
         #create json object with course number, idx value, last name, first name
         json_object = {
-            "course_number": course_number,
             "index_number": index_number,
-            "last_name": last_name,
-            "first_name": first_name
+            "project_name": project_name,
         }
 
         json_file = glob.glob('*.json') # get json file

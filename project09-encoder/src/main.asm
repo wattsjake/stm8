@@ -1,13 +1,30 @@
 stm8/
+;********************************************************
+;Program Name:  "main.asm"
+;Description: Read the encoder and blink the led light
+;
+;Author:        Jacob Watts
+;Device: STM8S003K3
+;Revision History
+;Date[YYYYMMDD] Author          Description
+;----           ------          -----------
+;20230924      Jacob W.        initial commit 
+;********************************************************
 
+;------------------------ TODO --------------------------
+; create a new .asm that .main calls - this will be the 
+; clear ram routine
+
+;---------------------- INCLUDES ------------------------
 	#include "mapping.inc"
     #include "stm8s103k.inc"
     
     segment byte at 100 'ram1'
 led_state  ds.b
-step       ds.b
-    
-	segment 'rom'
+output_a   ds.b
+output_b   ds.b
+
+    segment 'rom'
 main.l
 	; initialize SP
 	ldw X,#stack_end
@@ -47,33 +64,49 @@ clear_stack.l
 	cpw X,#stack_end	
 	jrule clear_stack
     
+	
+
+    
 ;------------------------ INIT --------------------------
 initilize:
+
+    ;set PB6 & PB7 as inputs
+    bres PB_DDR, #6; set PB6 as input
+    bres PB_DDR, #7; set PB7 as input
+
+	;set PB_CR1
+	bset PB_CR1, #6 ;sets PB6 as pull-up without interrupt
+	bset PB_CR1, #7 ;sets PB7 as pull-up without interrupt
+
+	;reset PB_CR2
+    bres PB_CR2, #6 ;sets PB6 as pull-up without interrupt
+    bres PB_CR2, #7 ;sets PB7 as pull-up without interrupt
+    
         
-    bset PD_DDR, #0 ;sets PD0 as output
-    bset PB_DDR, #7 ;sets PD7 as output
-    bset PB_CR1, #7 ;set as push-pull
+    bset PD_DDR, #0 ;sets PD0 as output for on board LED
     
     sim ;disable interrupts
-    mov TIM2_PSCR, #$01 ;3 = prescaler = 8 PC 0x8080
-    mov TIM2_ARRH, #$00 ;high byte of 50,000
-    mov TIM2_ARRL, #$5F ;low byte of 50,000
-    bset TIM2_IER, #0 ;enable update interrupt
+    mov TIM2_PSCR, #$03 ;3 = prescaler = 8 PC 0x8080
+    mov TIM2_ARRH, #$c3 ;high byte of 50,000
+    mov TIM2_ARRL, #$50 ;low byte of 50,000
+    ;bset TIM2_IER, #0 ;enable update interrupt
     rim ;Enable interrupts
     bset TIM2_CR1, #0 ;enable the timer
     
     bres PD_ODR, #0 ;sets PD0 to low led on
-    bres PB_ODR, #7 ;sets PB7 to low 
     bset led_state, #0 ;set bit0 to 1
-    bset step,  #7  ;set bit7 to 1
 ;------------------------ MAIN --------------------------
 loop:
-    ld A, led_state
-    mov PD_ODR, led_state
-    ld A, step
-    mov PB_ODR, step
     
-    ;ld led_state, A
+    mov output_a, PB_IDR
+    mov output_b, PB_IDR
+    
+    BTJT PB_IDR, #7, led_on
+    bres PD_ODR, #0
+    jra loop
+    
+led_on:
+    bset PD_ODR, #0
     jra loop
 
 ; TIM2 update/overflow handler
@@ -82,7 +115,6 @@ tim2_overflow.l
     mov TIM2_SR1, #$00 ;reset interupt
     xor A, #$FF
     ld led_state, A
-    ld step, A
     iret
     
 	interrupt NonHandledInterrupt
@@ -126,3 +158,4 @@ NonHandledInterrupt.l
 
     end ;need to do an 'Enter' after 'end' statement
     
+;------------------------ END ---------------------------

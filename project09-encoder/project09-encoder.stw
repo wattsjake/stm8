@@ -4,9 +4,9 @@
 Keyword=ST7Workspace-V0.7
 
 [Project0]
-Filename=src\echo.stp
+Filename=src\encoder.stp
 Dependencies=
 [Options]
-ActiveProject=echo
+ActiveProject=encoder
 ActiveConfig=Debug
 AddSortedElements=1
